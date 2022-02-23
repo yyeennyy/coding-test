@@ -66,5 +66,5 @@ public class Main {
     graph.get(8).add(7);
 
     bfs(1);
-   }
+  }
 }
