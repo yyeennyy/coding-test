@@ -33,12 +33,8 @@ public class Main{
     for (int i=0; i<4; i++) {
       int nx = x + dx[i]; 
       int ny = y + dy[i];
-      if (map[ny][nx] == 1){
-        DFS(ny, nx);
-      } 
-      if (finishFlag == true) {
-        return result++;
-      }
+      if (map[ny][nx] == 1) DFS(ny, nx);
+      if (finishFlag == true) return result++;
     }
     
     // 돌아가야 하는 경우 (재귀로 갱신된 맵 반영)
