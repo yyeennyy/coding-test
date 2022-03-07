@@ -1,6 +1,7 @@
 /* 
 boj 2777 : 단지번호붙이기
 - ice mold 문제와 거의 유사함
+- 방법: 스택 (재귀)
 */
 
 import java.util.*;
