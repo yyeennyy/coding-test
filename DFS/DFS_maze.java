@@ -7,7 +7,7 @@ public class Main{
   public static int N, M;
   public static int result = 0;
   public static boolean finishFlag = false;
-  public static int[][] map = new int[200][200];
+  public static int[][] map = new int[201][201];
 
   // 이동 방향 정의 (하우상좌)
   // 우측하단을 먼저 고려하고자 한다
