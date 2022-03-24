@@ -34,9 +34,8 @@ public class Main{
                     + "*".repeat((max_stars - ((k-1)*2)*2))
                     + " *".repeat((k-1)) + "\n");
     
-    if (!flag){
+    if (!flag)
       print_else_line(k);
-    }
   }
 
   public static void main(String[] args){
@@ -44,15 +43,14 @@ public class Main{
     N = sc.nextInt();
     max_stars = (2*N-1)*2 - 1;
     sc.nextLine();
-  
 
-    for(int i = 1; i <= N; i++){
+    for(int i = 1; i <= N; i++)
       draw_step_of(i, flag);
-    }
+
     flag = true;
-    for (int i = N-1; i >= 1; i--){
+    for (int i = N-1; i >= 1; i--)
       draw_step_of(i, flag);
-    }
+      
     sc.close();
   }
 }
