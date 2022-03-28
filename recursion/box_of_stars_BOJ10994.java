@@ -1,6 +1,9 @@
-// 재귀로 다시 풀었다.
-// 내가 처음 구현했던 방법(재귀X)보다 메모리, 시간 훨씬 우수
-// 재귀를 쓰지 않은 구현 : 
+// 재귀로 다시 풀었다. 
+// 이제 이런 재귀 문제는 자신감이 붙는다.
+
+// 내가 처음 구현했던 방법(재귀X)보다, 재귀를 사용한 방법이 메모리&시간이 훨씬 우수하다. 
+// ↓↓↓ (참고) 재귀를 쓰지 않은 구현 방법
+// 링크: https://github.com/yyhh314/CodingTest/blob/main/Implementation/point_stars_03_BOJ10994.java
 
 
 import java.io.BufferedReader;
