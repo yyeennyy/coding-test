@@ -62,6 +62,8 @@ public class Main {
     return after;
   }
 
+   
+   
   public static void main(String[] args) throws IOException{
     // treatment of input
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -86,8 +88,8 @@ public class Main {
     for (int i = 0; i < k; i++){
       man[i] = (char) (65 + i);
     }
-
-
+	
+    // get midList
     char[] after = new char[k];
     char[] after2 = new char[k];
     char[] midList = new char[k];
@@ -97,6 +99,8 @@ public class Main {
       midList2 = afterBackReach(target, after2, i);
     }
 
+
+    // complete 'result' array
     char[] result = new char[k-1];
 
     boolean flag = false;
@@ -115,7 +119,9 @@ public class Main {
         continue;
       }
     }
-
+    
+    
+    // print 'result' array
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
     boolean notDetermined = false;
