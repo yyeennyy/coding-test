@@ -100,7 +100,7 @@ public class Main {
     }
 
 
-    // complete 'result' array
+    // complete 'result' array by comparing midList with midList2
     char[] result = new char[k-1];
 
     boolean flag = false;
