@@ -1,0 +1,59 @@
+import java.util.*;
+
+import java.io.*;
+
+public class Main {
+  public static int[][] map;
+  public static int n;
+  public static int m;
+  public static int tmp = 0;
+
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String[] line = br.readLine().split(" ");
+    n = Integer.parseInt(line[0]);
+    m = Integer.parseInt(line[1]);
+
+    // 맵 구성
+    map = new int[n][m];
+    for (int i = 0; i < n; i++) {
+      line = br.readLine().split(" ");
+      for (int j = 0; j < m; j++) {
+        map[i][j] = Integer.parseInt(line[j]);
+      }
+    }
+
+    // BFS: 그림의 개수, 가장넓은 그림 넓이 출력하기
+    int count = 0;
+    int max = 0;
+    for (int r = 0; r < n; r++) {
+      for (int c = 0; c < m; c++) {
+        tmp = 0;
+        int res = BFS(r, c);
+        if (res != -1) {
+          count++;
+          if (res > max) {
+            max = res;
+          }
+        }
+      }
+    }
+    System.out.println(count);
+    System.out.println(max);
+  }
+
+  public static int BFS(int r, int c) {
+    if (r < 0 || c < 0 || r >= n || c >= m)
+      return -1;
+    if (map[r][c] == 0)
+      return -1;
+    else {
+      map[r][c] = 0;
+      BFS(r - 1, c);
+      BFS(r + 1, c);
+      BFS(r, c - 1);
+      BFS(r, c + 1);
+      return ++tmp;
+    }
+  }
+}
