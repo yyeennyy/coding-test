@@ -1,3 +1,20 @@
++ 다른 방법 -----------------------
+boolean solve(int x, int y){
+  if(x<0||x>=m||y<0||y>=n)
+    return false
+  if(map[x][y] == 0)
+    return false
+  else
+    map[x][y] = 0
+    solve(x,y-1)
+    solve(x+1,y)
+    solve(x,y+1)
+    solve(x-1,y)
+    return true
+}
+------------------------------------
+
+
 import java.util.*;
 
 import java.io.*;
