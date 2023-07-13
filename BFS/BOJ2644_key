@@ -1,0 +1,83 @@
+저번에 푼 distance[city] = distance[now] + 1; 문제랑 굉장히 유사함
+BFS를 할 때 단계단계별로 퍼져나가며 서치를 해야 할 경우에 해당!
+
+▼ 기억해야 할 부분 ---------
+
+while(!q.isEmpty()){
+      int now = q.poll();
+      if(now == C){
+        return check[now];
+      }
+      ArrayList<Integer> list = map.get(now);
+      for(int target : list){
+        if(check[target] == 0){
+          q.add(target);
+          check[target] = check[now] + 1;
+        }
+      }
+    }
+    return -1;
+  }
+}
+------------------------------
+
+
+
+import java.util.*;
+
+import java.io.*;
+
+public class Main {
+  public static Map<Integer, ArrayList<Integer>> map = new HashMap<>();
+  public static int[] check;
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String[] line = br.readLine().split(" ");
+    
+    int n = Integer.parseInt(line[0]);
+    check = new int[n+1];
+    for(int i=1; i<=n; i++){
+      map.put(i, new ArrayList<>());
+    }
+    
+    line = br.readLine().split(" ");
+    int A = Integer.parseInt(line[0]);
+    int B = Integer.parseInt(line[1]);
+
+    // 맵 생성
+    int m = Integer.parseInt(br.readLine());
+    for(int i=0; i<m; i++){
+      line = br.readLine().split(" ");
+      int P = Integer.parseInt(line[0]);
+      int C = Integer.parseInt(line[1]);
+      if(!map.get(P).contains(C))
+        map.get(P).add(C);
+      if(!map.get(C).contains(C))
+        map.get(C).add(P);
+    }
+
+    // BFS를 통해 A에서 B를 찾아간다. (누가 Parent인지는 몰라도 됨!)
+    // (촌수 따질 때 방향성은 상관 없기 때문!)
+    System.out.println(BFS(A, B, map));
+  }
+
+  public static int BFS(int P, int C, Map<Integer, ArrayList<Integer>> map){
+    Queue<Integer> q = new LinkedList<>();
+    q.add(P);
+    check[P] = 0;
+    while(!q.isEmpty()){
+      int now = q.poll();
+      if(now == C){
+        return check[now];
+      }
+      ArrayList<Integer> list = map.get(now);
+      for(int target : list){
+        if(check[target] == 0){
+          q.add(target);
+          check[target] = check[now] + 1;
+        }
+      }
+    }
+    return -1;
+  }
+}
