@@ -37,21 +37,17 @@ public class Main {
       }
     }
     // 위에서 익토를 q에 넣어줬으니, poll만 해서 진행하면 된다. (익토 최소 1개 존재)
-    for(int i=0; i<N; i++){
-      for(int j=0; j<M; j++){
-        while(!q.isEmpty()){
-          int[] now = q.poll();
-          for(int k=0; k<4; k++){
-            int x = now[1] + dx[k];
-            int y = now[0] + dy[k];
-            if(x<0||y<0||y>=N||x>=M)
-              continue;
-            if(box[y][x]==0 && visit[y][x]==0){
-              visit[y][x] = visit[now[0]][now[1]] + 1;  // 하루하루..
-              box[y][x] = 1; // 익었다..
-              q.add(new int[]{y, x});
-            }
-          }
+    while(!q.isEmpty()){
+      int[] now = q.poll();
+      for(int k=0; k<4; k++){
+        int x = now[1] + dx[k];
+        int y = now[0] + dy[k];
+        if(x<0||y<0||y>=N||x>=M)
+          continue;
+        if(box[y][x]==0 && visit[y][x]==0){
+          visit[y][x] = visit[now[0]][now[1]] + 1;  // 하루하루..
+          box[y][x] = 1; // 익었다..
+          q.add(new int[]{y, x});
         }
       }
     }
