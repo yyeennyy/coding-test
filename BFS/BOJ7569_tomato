@@ -1,0 +1,99 @@
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static String[][] map;
+    public static int N;
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] line = br.readLine().split(" ");
+        int M = Integer.parseInt(line[0]);
+        int N = Integer.parseInt(line[1]);
+        int H = Integer.parseInt(line[2]);
+        int[][][] map = new int[H][N][M];
+        int[][][] visit = new int[H][N][M];
+        for(int h=0; h<H; h++){
+            for(int n=0; n<N; n++){
+                line = br.readLine().split(" ");
+                for(int m=0; m<M; m++){
+                    map[h][n][m] = Integer.parseInt(line[m]);
+                    visit[h][n][m] = -1;
+                }
+            }
+        }
+
+        // 1: 익토
+        // 0: 안익토
+        // -1: 없
+        int max = 0;
+        int hh, nn, mm;
+        int n_, m_;
+        Queue<int[]> q = new LinkedList<>();
+        int[] dx = {0,0,-1,1};
+        int[] dy = {-1,1,0,0};
+        // 익은 토마토는 동시에 bfs해야 한다..
+        // 익토를 우선 싹다 큐에 넣기
+        for(int h=0; h<H; h++){
+            for(int n=0; n<N; n++){
+                for(int m=0; m<M; m++){
+                    if(map[h][n][m] == 1 && visit[h][n][m] == -1){ 
+                        q.add(new int[]{h, n, m});
+                        visit[h][n][m] = 0;
+                    }
+                }
+            }
+        }
+        // BFS 돌리기
+        while(!q.isEmpty()){
+            int[] now = q.poll();
+            hh = now[0]; nn = now[1]; mm = now[2];
+            for(int i=0; i<4; i++){ // 주변탐색
+                n_ = nn + dy[i];
+                m_ = mm + dx[i];
+                if(n_<0||m_<0||n_>=N||m_>=M)
+                    continue;
+                if(map[hh][n_][m_]==0 && visit[hh][n_][m_]==-1){ // 안익토를 만나면 익게하고 큐에 넣기
+                    visit[hh][n_][m_] = visit[hh][nn][mm] + 1;
+                    q.add(new int[]{hh, n_, m_});
+                    if(visit[hh][n_][m_] > max){
+                        max = visit[hh][n_][m_];
+                    }
+                }
+                // 위, 아래
+                int hUp = hh - 1;
+                int hDown = hh + 1;
+                if(hUp>=0){
+                    if(map[hUp][nn][mm]==0 && (visit[hUp][nn][mm]==-1 || visit[hh][nn][mm] + 1 < visit[hUp][nn][mm])){ // 안익토를 만나면 익게하고 큐에 넣기
+                        visit[hUp][nn][mm] = visit[hh][nn][mm] + 1;
+                        q.add(new int[]{hUp, nn, mm});
+                        if(visit[hUp][nn][mm] > max){
+                            max = visit[hUp][nn][mm];
+                        }
+                    }
+                }
+                if(hDown<H){
+                    if(map[hDown][nn][mm]==0 && (visit[hDown][nn][mm]==-1 || visit[hh][nn][mm] + 1 < visit[hDown][nn][mm])){ // 안익토를 만나면 익게하고 큐에 넣기
+                        visit[hDown][nn][mm] = visit[hh][nn][mm] + 1;
+                        q.add(new int[]{hDown, nn, mm});
+                        if(visit[hDown][nn][mm] > max){
+                            max = visit[hDown][nn][mm];
+                        }
+                    }
+                }
+            }
+        }
+        // 안익은 토마토 존재 검증
+        for(int h=0; h<H; h++){
+            for(int n=0; n<N; n++){
+                for(int m=0; m<M; m++){
+                    if(map[h][n][m] == 0 && visit[h][n][m] == -1){
+                        System.out.println(-1);
+                        return;
+                    }
+                }
+            }
+        }
+        // visit의 최댓값인 max 변수가 정답이다.
+        System.out.println(max);
+    }
+}
